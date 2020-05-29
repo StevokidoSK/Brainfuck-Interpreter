@@ -2,9 +2,15 @@
 #include <stdlib.h>
 #define MAX_MEMORY 255
 
-int main(){
+int main(int argc, char** argv){
+	
+	if(argc < 2){
+		printf("Correct usage: brainfuck FILE_PATH\n");
+		return -1;
+	}
+
 	//read file
-	FILE *f = fopen("program.bf", "rb");
+	FILE *f = fopen(argv[1], "rb");
 	fseek(f, 0, SEEK_END);
 	long fsize = ftell(f);
 	fseek(f, 0, SEEK_SET);  /* same as rewind(f); */
