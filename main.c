@@ -1,24 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX_MEMORY 255
 
 int main(){
+	//read file
 	FILE *f = fopen("program.bf", "rb");
 	fseek(f, 0, SEEK_END);
 	long fsize = ftell(f);
 	fseek(f, 0, SEEK_SET);  /* same as rewind(f); */
 	
-	int memsize = 255;
-	int* mem = malloc(memsize);
-
-	char *string = malloc(fsize + 1);
-	fread(string, 1, fsize, f);
+	char *program = malloc(fsize + 1);
+	fread(program, 1, fsize, f);
 	fclose(f);
-
-	string[fsize] = 0;
+	program[fsize] = 0;
 	
-	for(int i; i < fsize; i++){
-	
+	//allocate program memory
+	int ptr = 0;
+	char mem[MAX_MEMORY];
+	for(int i = 0; i < MAX_MEMORY; i++){
+		mem[i] = 0; 
 	}
 
+	//execute program
+	for(int i = 0; i < fsize; i++){
+		if(program[i] == '+') mem[ptr] += 1;
+		if(program[i] == '-') mem[ptr] -= 1;
+		if(program[i] == '>') ptr += 1;
+		if(program[i] == '<') ptr -= 1;
+		if(program[i] == '.') printf("%c", mem[ptr]);
+	}
+#if defined MEMORY_DUMP
+	for(int i = 0; i < MAX_MEMORY; i++) printf("%c", mem[i]);
+#endif
 	return 0;
 }
