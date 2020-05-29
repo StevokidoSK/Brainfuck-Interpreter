@@ -1,4 +1,4 @@
-Exampe brainfuck program
+Example brainfuck program
 
 ++++++++++++++++++++++++++++++++++++++++++++++++.+.+.+.+.+.+.+.+.+.
 >
