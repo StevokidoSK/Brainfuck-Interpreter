@@ -37,21 +37,31 @@ int main(int argc, char** argv){
 		if(program[i] == ',') mem[ptr] = getchar();
 		if(program[i] == '[' && mem[ptr] == 0){
 			int j = i;
+			int loopcnt = 0;
 			while(1){
 				j++;
-				if(program[j] == ']'){
+				if(program[j] == ']' && loopcnt == 0){
 					i = j + 1;
 					break;
+				} else if(program[j] == '['){
+					loopcnt++;
+				} else if(program[j] == ']' && loopcnt != 0){
+					loopcnt--;
 				}
 			}
 		}
 		if(program[i] == ']' && mem[ptr] != 0){
 			int j = i;
+			int loopcnt = 0;
 			while(1){
 				j--;
-				if(program[j] == '['){
+				if(program[j] == '[' && loopcnt == 0){
 					i = j;
 					break;
+				} else if(program[j] == ']') {
+					loopcnt++;
+				} else if(program[j] == '[' && loopcnt != 0) {
+					loopcnt--;
 				}
 			}
 		}
