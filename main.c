@@ -56,7 +56,7 @@ int main(int argc, char** argv){
 			while(1){
 				j--;
 				if(program[j] == '[' && loopcnt == 0){
-					i = j;
+					i = j + 1;
 					break;
 				} else if(program[j] == ']') {
 					loopcnt++;
